@@ -1,21 +1,159 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-fluid">
+    <form>
+  <div class="row bg-dark">
+   
+    <div class="col-3 text-light">
+      {{logo}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
 
-<router-outlet></router-outlet>
+    </div>
+    <div class="col-md-6 alignment">
+      <div class="card">
+        <div class="card-header">
+          Create Post:
+        </div>
+        
+        <div class="card-body">
+        <textarea name="postValue" [(ngModel)]="post.postValue" class='form-control' cols="100" rows="2" placeholder="Write Somethoing here..."></textarea>
+        </div>
+        
+        <div class="card-footer">
+          <a  (click)="postText()" class="btn btn-primary">Post Text</a>
+          <label  class="btn btn-info">
+            Post Image
+            <input (change)="postImage($event)" type="file" style="display:none">
+          </label>
+         
+          <label  class="btn btn-success">
+              Post Video
+              <input (change)="postVideo($event)" type="file" style="display:none">
+            </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      
+    </div>
+  </div>
+  
+  <!--Main section container-->
+  
+  <div class="row main-container">
+    
+       <div class="col-md-3">
+             
+       </div>
+  <!--Main section for block-->
+  
+       <div class="col-md-6">
+         <ng-container *ngFor="let item of postList; let itemIndex=index;">
+         <!--text section-->
+          <div class="card  main-section" *ngIf="item.postType=='TEXT'">
+            <div class="card-hearder h4">
+              Text-Block
+            </div>
+            <div class="card-body main-body">
+              <div class="main-child1" style="height:auto;padding:20px;">
+                {{item.postValue}}
+              </div>
+              <div class="main-child2 text-muted">
+                <span class="bg-light">{{item.likeCount}} like</span>
+                <span  class="bg-light">{{item.subscribeCount}} Subscriber</span>
+                <span  class="bg-light">{{item.commentList.length}} comments</span>
+              </div>
+            </div>
+            <div class="card-footer main-footer">
+              <div>
+              <a (click)="likeCount(item)" class="btn btn-primary">Like</a>
+              <a class="btn btn-info" (click)=" subsciberCount(item)">Subscribe</a>
+              <a class="btn btn-success"  (click)=" addcomment(item)">Comment</a>
+     
+                  <a class="btn btn-danger" (click)="deletePost(itemIndex)">Delete</a>
+              </div>
+            </div>
+          </div>
+          <!--image section-->
+          <div class="card  main-section" *ngIf="item.postType=='IMAGE'">
+              <div class="card-hearder h4">
+                Iamge-Block
+              </div>
+              <div class="card-body main-body">
+                <div class="main-child1" style="height:250px">
+                  <img [src]="item.postValue" style="height:100%;width:100%;object-fit:contain;padding:10px;">
+                </div>
+                <div class="main-child2 text-muted">
+                  <span class="bg-light">{{item.likeCount}} like</span>
+                  <span  class="bg-light">{{item.subscribeCount}} Subscriber</span>
+                  <span  class="bg-light">{{item.commentList.length}} comments</span>
+                </div>
+              </div>
+              <div class="card-footer main-footer ">
+                <div>
+                  <a (click)="likeCount(item)" class="btn btn-primary">Like</a>
+                  <a class="btn btn-info" (click)=" subsciberCount(item)">Subscribe</a>
+                  <a class="btn btn-success"  (click)=" addcomment(item)">Comment</a>
+                
+              
+                   
+                    <a class="btn btn-danger" (click)="deletePost(itemIndex)">Delete</a>
+                </div>
+              </div>
+            </div>
+            <!--video section-->
+         <div class="card  main-section" *ngIf="item.postType=='VIDEO'">
+                <div class="card-hearder h4">
+                  Video-Block
+                </div>
+                <div class="card-body main-body">
+                  <div class="main-child1" style="height:250px">
+                   <video style="height:100%;width:100%;">
+                     <source [src]="item.postValue" controls>
+                   </video>
+                  </div>
+                  <div class="main-child2 text-muted">
+                    <span class="bg-light">{{item.likeCount}} like</span>
+                  <span  class="bg-light">{{item.subscribeCount}} Subscriber</span>
+                  <span  class="bg-light">{{item.commentList.length}} comments</span>
+                  </div>
+                </div>
+                <div class="card-footer main-footer ">
+                  <div>
+                    <a (click)="likeCount(item)" class="btn btn-primary">Like</a>
+                    <a class="btn btn-info" (click)=" subsciberCount(item)">Subscribe</a>
+                    <a class="btn btn-success"  (click)=" addcomment(item)">Comment</a>
+                  
+                
+                     
+                      <a class="btn btn-danger" (click)="deletePost(itemIndex)">Delete</a>
+                  </div>
+                </div>
+              </div>
+              </ng-container>
+              <!--No post Available-->
+              <div class="card  main-section"  *ngIf='postList.length==0'>
+                  <div class="card-hearder h4">
+                    Header
+                  </div>
+                  <div class="card-body main-body">
+                    <div class="main-child1" style="height:auto">
+                     No post Is Available
+                    </div>
+                    
+                  </div>
+                  <div class="card-footer main-footer ">
+                    Footer
+                </div>
+              
+      </div>
+      
+      <div class="col-md-3">
+     
+      </div>
+      
+  </div>
+</div>
+</form>
+</div>

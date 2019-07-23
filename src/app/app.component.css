@@ -1,0 +1,80 @@
+.bg-dark{
+    background-color:black;
+    height:55px;
+    
+}
+.text-light{
+    color:white;
+    font-family:cursive;
+    font-size:20px;
+    color:blue;
+    padding:15px;
+}
+.alignment{
+    margin-top:20px;
+    border-radius:10px;
+    
+    padding:10px;
+    background-color:gray;
+}
+.card-header {
+    color:white;
+    padding:10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+}
+.card-footer{
+    padding-top:10px;
+    cursor: pointer;
+}
+.card-footer label {  
+    font-size: 13px;
+    margin:5px;
+}
+.main-container{
+    margin:10px;
+    
+}
+.main-section{
+    border:2px solid gray;
+    height:auto;
+    padding:10px;
+    box-shadow: 0px 0px 2px;
+     margin:15px;
+}
+.h4{
+padding:10px;
+background-color: skyblue;
+text-align: center;
+}
+.main-child1{
+    color:black;
+    text-align:center;
+    font-family: cursive;
+    font-size:2rem;
+    font-style:bold;
+    
+}
+.main-body {
+    border-bottom:2px solid black;
+    padding:10px;
+    text-align: center;
+}
+.main-footer{
+    text-align:center;
+}
+.main-footer a {
+    margin:5px;
+    width:auto;
+    height:auto;
+    font-size:12px;
+    border-radius:10px;
+}
+
+.main-child2 span{
+    padding:10px;
+    font-size:small;
+}
+.main-child1 video {
+    padding-bottom:10px;
+}
